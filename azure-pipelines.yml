@@ -24,15 +24,17 @@ trigger:
 
 
 steps:
-  - task: cake-build.cake.cake-build-task.Cake@0
-    displayName: "Build Wyam site"
-    inputs:
-      target: Build
+  # - task: cake-build.cake.cake-build-task.Cake@0
+  #   displayName: "Build Wyam site"
+  #   inputs:
+  #     target: Build
 
   - powershell: |
       Write-Host "Cloning existing GitHub Pages branch"
 
       $workingDir = "$(System.DefaultWorkingDirectory)\${BRANCH_NAME}"
+
+      Write-Host ${env:REPOSITORY_NAME}
 
       git clone https://${env:GITHUB_USERNAME}:$(GITHUB_ACCESS_TOKEN)@github.com/${env:GITHUB_USERNAME}/${env:REPOSITORY_NAME}.git --branch=${BRANCH_NAME} ${BRANCH_NAME} --quiet
 
