@@ -1,6 +1,6 @@
 dist: xenial
 language: csharp
-mono: none
+mono: 5.18.0
 dotnet: 2.2.104
 env:
   - PATH=$PATH:$HOME/.dotnet/tools

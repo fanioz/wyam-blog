@@ -7,3 +7,5 @@ author: Johan Vergeer
 To publish your Wyam site on GitHub Pages it can be useful to use Travis CI to do your builds fully automatically.
 
 First of all, you should create an account at [travis-ci.com](https://travis-ci.com) and link your GitHub account.
+
+http://cakebuild.net/docs/tutorials/setting-up-a-new-project
