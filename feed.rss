@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+	<channel>
+		<title>My Blog</title>
+		<link>http://host.com/</link>
+		<description>Welcome!</description>
+		<copyright>2019</copyright>
+		<pubDate>Sun, 10 Mar 2019 12:31:25 GMT</pubDate>
+		<lastBuildDate>Sun, 10 Mar 2019 12:31:25 GMT</lastBuildDate>
+		<item>
+			<title>Travis CI setup for Wyam</title>
+			<link>http://host.com/posts/travis-ci-wyam</link>
+			<description>&lt;p&gt;To publish your Wyam site on GitHub Pages it can be useful to use Travis CI to do your builds fully automatically.&lt;/p&gt;</description>
+			<author>Johan Vergeer</author>
+			<guid>http://host.com/posts/travis-ci-wyam</guid>
+			<pubDate>Sat, 09 Mar 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;To publish your Wyam site on GitHub Pages it can be useful to use Travis CI to do your builds fully automatically.&lt;/p&gt;
+&lt;p&gt;First of all, you should create an account at &lt;a href="https://travis-ci.com"&gt;travis-ci.com&lt;/a&gt; and link your GitHub account.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://cakebuild.net/docs/tutorials/setting-up-a-new-project"&gt;http://cakebuild.net/docs/tutorials/setting-up-a-new-project&lt;/a&gt;&lt;/p&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>First Post</title>
+			<link>http://host.com/posts/first-post</link>
+			<description>&lt;p&gt;This is my first post!&lt;/p&gt;</description>
+			<author>Johan Vergeer</author>
+			<guid>http://host.com/posts/first-post</guid>
+			<pubDate>Fri, 01 Jan 2016 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;This is my first post!&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cs"&gt;public class Foo  
+{  
+  int Baz { get; set; }  
+}  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class="note"&gt;
+Exercitation dolor nisi sit dolor nulla Lorem. Ipsum cillum incididunt id ex tempor mollit voluptate anim occaecat Lorem sit. Qui ut consectetur sunt culpa voluptate. Veniam id quis deserunt velit ut deserunt nulla do commodo mollit.
+&lt;/div&gt;
+&lt;?# Warning ?&gt;
+&lt;ol&gt;
+&lt;li&gt;Qui velit sunt cillum ad laboris dolor in. Ipsum veniam id commodo consequat. Duis proident Lorem eiusmod elit veniam est consectetur. Ipsum magna elit culpa sunt voluptate reprehenderit adipisicing non pariatur.&lt;/li&gt;
+&lt;li&gt;Nostrud esse aute non velit reprehenderit aute consectetur officia Lorem ullamco do consequat. Exercitation sint pariatur fugiat aute Lorem tempor proident. Incididunt est laboris amet pariatur culpa occaecat. Sit incididunt commodo id eiusmod aliqua voluptate elit id esse anim ea pariatur. Proident cupidatat duis dolore aliquip incididunt aliquip deserunt mollit dolor anim voluptate. Non enim cillum dolore officia.&lt;/li&gt;
+&lt;li&gt;Qui nostrud incididunt sint nulla do incididunt. Ut id laboris fugiat quis. Cupidatat culpa do minim eu velit Lorem non anim minim sit eu. Officia ullamco nulla ipsum occaecat esse voluptate nulla. Duis laboris consectetur Lorem duis elit ullamco dolor nulla.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;?#/ Warning ?&gt;
+&lt;?# Example ?&gt;
+&lt;ol&gt;
+&lt;li&gt;Qui velit sunt cillum ad laboris dolor in. Ipsum veniam id commodo consequat. Duis proident Lorem eiusmod elit veniam est consectetur. Ipsum magna elit culpa sunt voluptate reprehenderit adipisicing non pariatur.&lt;/li&gt;
+&lt;li&gt;Nostrud esse aute non velit reprehenderit aute consectetur officia Lorem ullamco do consequat. Exercitation sint pariatur fugiat aute Lorem tempor proident. Incididunt est laboris amet pariatur culpa occaecat. Sit incididunt commodo id eiusmod aliqua voluptate elit id esse anim ea pariatur. Proident cupidatat duis dolore aliquip incididunt aliquip deserunt mollit dolor anim voluptate. Non enim cillum dolore officia.&lt;/li&gt;
+&lt;li&gt;Qui nostrud incididunt sint nulla do incididunt. Ut id laboris fugiat quis. Cupidatat culpa do minim eu velit Lorem non anim minim sit eu. Officia ullamco nulla ipsum occaecat esse voluptate nulla. Duis laboris consectetur Lorem duis elit ullamco dolor nulla.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;?#/ Example ?&gt;
+&lt;?# Note ?&gt;
+&lt;ol&gt;
+&lt;li&gt;Qui velit sunt cillum ad laboris dolor in. Ipsum veniam id commodo consequat. Duis proident Lorem eiusmod elit veniam est consectetur. Ipsum magna elit culpa sunt voluptate reprehenderit adipisicing non pariatur.&lt;/li&gt;
+&lt;li&gt;Nostrud esse aute non velit reprehenderit aute consectetur officia Lorem ullamco do consequat. Exercitation sint pariatur fugiat aute Lorem tempor proident. Incididunt est laboris amet pariatur culpa occaecat. Sit incididunt commodo id eiusmod aliqua voluptate elit id esse anim ea pariatur. Proident cupidatat duis dolore aliquip incididunt aliquip deserunt mollit dolor anim voluptate. Non enim cillum dolore officia.&lt;/li&gt;
+&lt;li&gt;Qui nostrud incididunt sint nulla do incididunt. Ut id laboris fugiat quis. Cupidatat culpa do minim eu velit Lorem non anim minim sit eu. Officia ullamco nulla ipsum occaecat esse voluptate nulla. Duis laboris consectetur Lorem duis elit ullamco dolor nulla.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;?#/ Note ?&gt;
+&lt;?# Tip ?&gt;
+&lt;ol&gt;
+&lt;li&gt;Qui velit sunt cillum ad laboris dolor in. Ipsum veniam id commodo consequat. Duis proident Lorem eiusmod elit veniam est consectetur. Ipsum magna elit culpa sunt voluptate reprehenderit adipisicing non pariatur.&lt;/li&gt;
+&lt;li&gt;Nostrud esse aute non velit reprehenderit aute consectetur officia Lorem ullamco do consequat. Exercitation sint pariatur fugiat aute Lorem tempor proident. Incididunt est laboris amet pariatur culpa occaecat. Sit incididunt commodo id eiusmod aliqua voluptate elit id esse anim ea pariatur. Proident cupidatat duis dolore aliquip incididunt aliquip deserunt mollit dolor anim voluptate. Non enim cillum dolore officia.&lt;/li&gt;
+&lt;li&gt;Qui nostrud incididunt sint nulla do incididunt. Ut id laboris fugiat quis. Cupidatat culpa do minim eu velit Lorem non anim minim sit eu. Officia ullamco nulla ipsum occaecat esse voluptate nulla. Duis laboris consectetur Lorem duis elit ullamco dolor nulla.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;?#/ Tip ?&gt;
+</content:encoded>
+		</item>
+	</channel>
+</rss>
