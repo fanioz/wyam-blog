@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>My Blog - Travis CI setup for Wyam</title>
+  <title>My Blog - Wyam, Azure DevOps and GitHub Pages</title>
   <meta name="description" content="Welcome!" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    
 
@@ -29,9 +29,9 @@
   <meta name="msapplication-tooltip" content="My Blog" />
   <meta name="msapplication-starturl" content="/" />
 
-  <meta property="og:title" content="My Blog - Travis CI setup for Wyam" />
+  <meta property="og:title" content="My Blog - Wyam, Azure DevOps and GitHub Pages" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://host.com/posts/travis-ci-wyam" />
+  <meta property="og:url" content="http://host.com/posts/wyam-azure-devops" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,37 +64,46 @@
         <figure class="absolute-bg mast__img" style="background-image: url('/assets/images/background.jpg');"></figure>
         <div class="mast__container">
             <span>
-                Created on <time datetime="YYYY-03-DD">Saturday, March 9, 2019</time>
+                Created on <time datetime="YYYY-03-DD">Sunday, March 10, 2019</time>
                     <span>by Johan Vergeer</span>
             </span>
-            <h1>Travis CI setup for Wyam</h1>   
+            <h1>Wyam, Azure DevOps and GitHub Pages</h1>   
                             <span>
 Tags: 
-                            <a class="nav--white" href="/tags/C%23">C#</a>
+                            <a class="nav--white" href="/tags/Azure-DevOps">Azure DevOps</a>
+,                            <a class="nav--white" href="/tags/C%23">C#</a>
 ,                            <a class="nav--white" href="/tags/Continuous-Integration">Continuous Integration</a>
-,                            <a class="nav--white" href="/tags/GitHub">GitHub</a>
+,                            <a class="nav--white" href="/tags/GitHub-Pages">GitHub Pages</a>
 ,                            <a class="nav--white" href="/tags/Wyam">Wyam</a>
                 </span>
         </div>
     </header>
     <section class="section-padding bg-grey">
         <div class="post">
-            <p>To publish your Wyam site on GitHub Pages it can be useful to use Travis CI to do your builds fully automatically.</p>
-<p>First of all, you should create an account at <a href="https://travis-ci.com">travis-ci.com</a> and link your GitHub account.</p>
-<p><a href="http://cakebuild.net/docs/tutorials/setting-up-a-new-project">http://cakebuild.net/docs/tutorials/setting-up-a-new-project</a></p>
+            <p>Publishing a static site with a static content generator can be fully automated. In this case I'm using <a href="https://wyam.io/">Wyam</a>, a static site generator, <a href="https://pages.github.com/">GitHub Pages</a> for hosting and <a href="https://azure.microsoft.com/en-us/solutions/devops/">Azure DevOps</a> for build and deployment. Of course there are a ton of other ways to do this, but right now I'll show you the way that I chose to use.</p>
+<p>This post will mainly focus on automated build and deployment, since there are a lot of great online resources on how to setup Wyam on your local machine.</p>
+<h1 id="github-setup">GitHub setup</h1>
+<p>As I said, I'm using GitHub Pages to host my site. You can use it for free for any static website. By default GitHub Pages supports <a href="https://jekyllrb.com/">Jelyll</a> with some out of the box themes and plugins. I used Jekyll in the past, but I found Wyam easier to work with.</p>
+<p>To create a personal blog on GitHub Pages, you should create a Git repository named <code>yourusername.github.io</code>. When you do this, GitHub will automatically create the site for you, and use the <code>master</code> branch for the site content. So once you created the repository, don't use the master branch, but create a new branch that will contain your working files. I named my working branch <code>source</code>.</p>
+<p>Perform the following commands after you created the repository on GitHub to setup the branches.</p>
+<div class='box box-tip'>
+<p>Make sure you <strong>don't</strong> include README and .gitignore when creating the repository on GitHub</p>
+</div>
+<pre><code class="language-bash">git clone git&#64;github.com:yourusername/yourusername.github.io.git
+cd yourusername.github.io
+git branch source
+git checkout source
+git push -u origin source
+</code></pre>
+<p>These command will clone the repository from GitHub, create a new branch named <code>source</code>, push the new branch to GitHub and makes <code>source</code> the default branch. You can check whether you are on the source branch with this command:</p>
+<pre><code class="language-powershell">PS&gt; git status
+On branch source
+</code></pre>
  
         </div>          
     </section>
 </article>
 
-    <section class="next">
-        <a class="next__link" href="/posts/wyam-azure-devops" style="background-image: url('/assets/images/background.jpg');">
-            <div class="next__container">
-                <span>Read Next</span>
-                <h2>Wyam, Azure DevOps and GitHub Pages</h2>
-            </div> 
-        </a>
-    </section>
 
 <footer class="section-padding--sm footer">
   <span>
