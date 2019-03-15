@@ -4,8 +4,115 @@
 	<title>My Blog</title>
 	<link rel="self" href="http://host.com/" />
 	<rights>2019</rights>
-	<updated>2019-03-11T19:14:35Z</updated>
+	<updated>2019-03-15T21:49:20Z</updated>
 	<subtitle>Welcome!</subtitle>
+	<entry>
+		<id>http://host.com/posts/cake</id>
+		<title>Cake</title>
+		<author>
+			<name>Johan Vergeer</name>
+		</author>
+		<link href="http://host.com/posts/cake" />
+		<updated>2019-03-15T00:00:00Z</updated>
+		<content>&lt;p&gt;This page contains some snippets and links I refer to when I'm creating Cake scripts.
+Most of this information can be found on the &lt;a href="https://cakebuild.net/"&gt;Cake website&lt;/a&gt;,
+but this should give a better overview of some things I personally use.&lt;/p&gt;
+&lt;h1 id="gitignore"&gt;.gitignore&lt;/h1&gt;
+&lt;p&gt;The  &lt;code&gt;.gitignore&lt;/code&gt; file should contain the following lines:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-plaintext"&gt;tools/*
+!tools/packages.config
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="build.cake-content"&gt;build.cake content&lt;/h1&gt;
+&lt;h2 id="arguments"&gt;Arguments&lt;/h2&gt;
+&lt;p&gt;This defines a &lt;code&gt;-target&lt;/code&gt; argument which, when omitted, defaults to &lt;em&gt;Default&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var target = Argument(&amp;quot;target&amp;quot;, &amp;quot;Default&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This defines a &lt;code&gt;-configuration&lt;/code&gt; argument which, when omitted, defaults to &lt;em&gt;Release&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var configuration = Argument(&amp;quot;configuration&amp;quot;, &amp;quot;Release&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="tasks"&gt;Tasks&lt;/h2&gt;
+&lt;p&gt;A Cake file contains &lt;em&gt;Tasks&lt;/em&gt; that we want to execute:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Task(&amp;quot;Default&amp;quot;)
+    .IsDependentOn(&amp;quot;Dotnet-Core-Package&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="cleandirectory-cleandirectories"&gt;CleanDirectory / CleanDirectories&lt;/h3&gt;
+&lt;p&gt;These aliases make sure that the directory or directories exist, and that they are empty.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Task(&amp;quot;Clean&amp;quot;)
+    .Does(() =&amp;gt; {
+        CleanDirectory(&amp;quot;./BuildArtifacts&amp;quot;);
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="dotnetcorerestore"&gt;DotNetCoreRestore&lt;/h3&gt;
+&lt;p&gt;In the example below is &lt;code&gt;DotNetCoreRestore&lt;/code&gt; an alias, which is running the &lt;em&gt;dotnet cli&lt;/em&gt; with the &lt;code&gt;restore&lt;/code&gt; command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Task(&amp;quot;Dotnet-Core-Package&amp;quot;)
+    .Does(() =&amp;gt; {
+        DotNetCoreRestore(
+            &amp;quot;./src/project/project.csproj&amp;quot;,
+            new DotNetCoreRestoreSettings {
+                PackagesDirectory = &amp;quot;./src/packages&amp;quot;
+            }
+        );
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="dotnetcorebuild"&gt;DotNetCoreBuild&lt;/h3&gt;
+&lt;p&gt;In the next example the &lt;code&gt;DotNetCoreBuild&lt;/code&gt; is an alias, which is running the &lt;em&gt;dotnet cli&lt;/em&gt; with the &lt;code&gt;build&lt;/code&gt; command.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Task(&amp;quot;Build&amp;quot;)
+    .IsDependentOn(&amp;quot;Dotnet-Core-Build&amp;quot;)
+    .Does(() =&amp;gt; {
+        var settings = new DotNetCoreBuildSettings {
+            Configuration = configuration,
+            NoRestore = true
+        };
+
+        DotNetCoreBuild(&amp;quot;./src/project/project.csproj&amp;quot;);
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="dotnetcorepublish"&gt;DotNetCorePublish&lt;/h3&gt;
+&lt;p&gt;Publish to the local file system.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;Task(&amp;quot;Publish&amp;quot;)
+    .IsDependentOn(&amp;quot;Build&amp;quot;)
+    .Does(() =&amp;gt; {
+        var settings = new DotNetCorePublishSettings {
+            Configuration = configuration,
+            OutputDirectory = &amp;quot;./BuildArtifacts&amp;quot;
+        };
+
+        DotNetCorePublish(&amp;quot;./src/project/project.csproj&amp;quot;, settings);
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="aliases"&gt;Aliases&lt;/h3&gt;
+&lt;p&gt;Cake supports something called &lt;a href="https://cakebuild.net/docs/fundamentals/aliases"&gt;script aliases&lt;/a&gt;. Script aliases are convenience methods that are easily accessible directly from a Cake script. Every single &lt;a href="https://cakebuild.net/dsl/"&gt;DSL method&lt;/a&gt; in Cake is implemented like an alias method.&lt;/p&gt;
+&lt;h2 id="runtarget"&gt;RunTarget&lt;/h2&gt;
+&lt;p&gt;The end of build.cake should contain the following line to run:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;RunTarget(target);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will make sure the &lt;code&gt;tools&lt;/code&gt; directory is not included in source control, except for &lt;code&gt;packages.config&lt;/code&gt;,
+which contains the Cake version we're using.&lt;/p&gt;
+&lt;h1 id="what-is-a-build"&gt;What is a build?&lt;/h1&gt;
+&lt;h2 id="typical-build-workflow"&gt;Typical build workflow&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Package restore&lt;/li&gt;
+&lt;li&gt;Clean&lt;/li&gt;
+&lt;li&gt;Unit Tests&lt;/li&gt;
+&lt;li&gt;Test Coverage (NCover, OpenCover)&lt;/li&gt;
+&lt;li&gt;Static analysis
+&lt;ol&gt;
+&lt;li&gt;StyleCop&lt;/li&gt;
+&lt;li&gt;FxCop&lt;/li&gt;
+&lt;li&gt;DupFinder&lt;/li&gt;
+&lt;li&gt;InspectCode&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Package&lt;/li&gt;
+&lt;li&gt;Publish&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id="intellisense"&gt;Intellisense&lt;/h1&gt;
+&lt;p&gt;To have Intellisense in VS Code for Cake, just run the &lt;code&gt;Cake: Install Intellisense Support&lt;/code&gt; and &lt;code&gt;OmniSharp: Restart OmniSharp&lt;/code&gt; commands in VS Code.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;This page contains some snippets and links I refer to when I'm creating Cake scripts.
+Most of this information can be found on the &lt;a href="https://cakebuild.net/"&gt;Cake website&lt;/a&gt;,
+but this should give a better overview of some things I personally use.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<id>http://host.com/posts/creating-styled-boxes</id>
 		<title>Creating styled boxes for a Wyam site</title>
