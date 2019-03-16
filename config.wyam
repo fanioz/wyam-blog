@@ -3,6 +3,7 @@
 #t Trophy
 
 #n Wyam.Highlight
+#n Wyam.SearchIndex
 
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "host.com";
