@@ -16,7 +16,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>My Blog - Cake</title>
+  <title>My Blog - VS Code Settings</title>
   <meta name="description" content="Welcome!" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">    
 
@@ -40,9 +40,9 @@
   <meta name="msapplication-tooltip" content="My Blog" />
   <meta name="msapplication-starturl" content="/" />
 
-  <meta property="og:title" content="My Blog - Cake" />
+  <meta property="og:title" content="My Blog - VS Code Settings" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://host.com/posts/cake" />
+  <meta property="og:url" content="http://host.com/posts/vs-code-settings" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -75,123 +75,35 @@
         <figure class="absolute-bg mast__img" style="background-image: url('/assets/images/background.jpg');"></figure>
         <div class="mast__container">
             <span>
-                Created on <time datetime="YYYY-03-DD">Friday, March 15, 2019</time>
+                Created on <time datetime="YYYY-03-DD">Sunday, March 24, 2019</time>
                     <span>by Johan Vergeer</span>
             </span>
-            <h1>Cake</h1>   
+            <h1>VS Code Settings</h1>   
                             <span>
 Tags: 
-                            <a class="nav--white" href="/tags/C%23">C#</a>
-,                            <a class="nav--white" href="/tags/Cake">Cake</a>
+                            <a class="nav--white" href="/tags/Visual-Studio-Code">Visual Studio Code</a>
+,                            <a class="nav--white" href="/tags/VS-Code">VS Code</a>
                 </span>
         </div>
     </header>
     <section class="section-padding bg-grey">
         <div class="post">
-            <p>This page contains some snippets and links I refer to when I'm creating Cake scripts.
-Most of this information can be found on the <a href="https://cakebuild.net/">Cake website</a>,
-but this should give a better overview of some things I personally use.</p>
-<h1 id="gitignore">.gitignore</h1>
-<p>The  <code>.gitignore</code> file should contain the following lines:</p>
-<pre><code class="language-plaintext">tools/*
-!tools/packages.config
+            <p>VS Code is very configurable. In this post I'll share the configuration I like to use.</p>
+<h1 id="auto-save">Auto save</h1>
+<p>Most of the time I like my IDE to save files automatically instead of having to save each and every file independently. I know, I can save all files, but that's still more work that letting the IDE do it.</p>
+<p>To configure this, just add the following to the main object in <code>settings.json</code>:</p>
+<pre><code class="language-json">&quot;files.autoSave&quot;: &quot;afterDelay&quot;
 </code></pre>
-<h1 id="build.cake-content">build.cake content</h1>
-<h2 id="arguments">Arguments</h2>
-<p>This defines a <code>-target</code> argument which, when omitted, defaults to <em>Default</em></p>
-<pre><code class="language-csharp">var target = Argument(&quot;target&quot;, &quot;Default&quot;)
-</code></pre>
-<p>This defines a <code>-configuration</code> argument which, when omitted, defaults to <em>Release</em></p>
-<pre><code class="language-csharp">var configuration = Argument(&quot;configuration&quot;, &quot;Release&quot;)
-</code></pre>
-<h2 id="tasks">Tasks</h2>
-<p>A Cake file contains <em>Tasks</em> that we want to execute:</p>
-<pre><code class="language-csharp">Task(&quot;Default&quot;)
-    .IsDependentOn(&quot;Dotnet-Core-Package&quot;)
-</code></pre>
-<h3 id="cleandirectory-cleandirectories">CleanDirectory / CleanDirectories</h3>
-<p>These aliases make sure that the directory or directories exist, and that they are empty.</p>
-<pre><code class="language-csharp">Task(&quot;Clean&quot;)
-    .Does(() =&gt; {
-        CleanDirectory(&quot;./BuildArtifacts&quot;);
-    });
-</code></pre>
-<h3 id="dotnetcorerestore">DotNetCoreRestore</h3>
-<p>In the example below is <code>DotNetCoreRestore</code> an alias, which is running the <em>dotnet cli</em> with the <code>restore</code> command.</p>
-<pre><code class="language-csharp">Task(&quot;Dotnet-Core-Package&quot;)
-    .Does(() =&gt; {
-        DotNetCoreRestore(
-            &quot;./src/project/project.csproj&quot;,
-            new DotNetCoreRestoreSettings {
-                PackagesDirectory = &quot;./src/packages&quot;
-            }
-        );
-    });
-</code></pre>
-<h3 id="dotnetcorebuild">DotNetCoreBuild</h3>
-<p>In the next example the <code>DotNetCoreBuild</code> is an alias, which is running the <em>dotnet cli</em> with the <code>build</code> command.</p>
-<pre><code class="language-csharp">Task(&quot;Build&quot;)
-    .IsDependentOn(&quot;Dotnet-Core-Build&quot;)
-    .Does(() =&gt; {
-        var settings = new DotNetCoreBuildSettings {
-            Configuration = configuration,
-            NoRestore = true
-        };
-
-        DotNetCoreBuild(&quot;./src/project/project.csproj&quot;);
-    });
-</code></pre>
-<h3 id="dotnetcorepublish">DotNetCorePublish</h3>
-<p>Publish to the local file system.</p>
-<pre><code class="language-csharp">Task(&quot;Publish&quot;)
-    .IsDependentOn(&quot;Build&quot;)
-    .Does(() =&gt; {
-        var settings = new DotNetCorePublishSettings {
-            Configuration = configuration,
-            OutputDirectory = &quot;./BuildArtifacts&quot;
-        };
-
-        DotNetCorePublish(&quot;./src/project/project.csproj&quot;, settings);
-    });
-</code></pre>
-<h3 id="aliases">Aliases</h3>
-<p>Cake supports something called <a href="https://cakebuild.net/docs/fundamentals/aliases">script aliases</a>. Script aliases are convenience methods that are easily accessible directly from a Cake script. Every single <a href="https://cakebuild.net/dsl/">DSL method</a> in Cake is implemented like an alias method.</p>
-<h2 id="runtarget">RunTarget</h2>
-<p>The end of build.cake should contain the following line to run:</p>
-<pre><code class="language-csharp">RunTarget(target);
-</code></pre>
-<p>This will make sure the <code>tools</code> directory is not included in source control, except for <code>packages.config</code>,
-which contains the Cake version we're using.</p>
-<h1 id="what-is-a-build">What is a build?</h1>
-<h2 id="typical-build-workflow">Typical build workflow</h2>
-<ol>
-<li>Package restore</li>
-<li>Clean</li>
-<li>Unit Tests</li>
-<li>Test Coverage (NCover, OpenCover)</li>
-<li>Static analysis
-<ol>
-<li>StyleCop</li>
-<li>FxCop</li>
-<li>DupFinder</li>
-<li>InspectCode</li>
-</ol>
-</li>
-<li>Package</li>
-<li>Publish</li>
-</ol>
-<h1 id="intellisense">Intellisense</h1>
-<p>To have Intellisense in VS Code for Cake, just run the <code>Cake: Install Intellisense Support</code> and <code>OmniSharp: Restart OmniSharp</code> commands in VS Code.</p>
  
         </div>          
     </section>
 </article>
 
     <section class="next">
-        <a class="next__link" href="/posts/wyam-azure-devops" style="background-image: url('/assets/images/background.jpg');">
+        <a class="next__link" href="/posts/vs-code-extensions" style="background-image: url('/assets/images/background.jpg');">
             <div class="next__container">
                 <span>Read Next</span>
-                <h2>Wyam, Azure DevOps and GitHub Pages</h2>
+                <h2>VS Code Extensions</h2>
             </div> 
         </a>
     </section>
@@ -200,9 +112,9 @@ which contains the Cake version we're using.</p>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'johanvergeer-github-io'; // required: replace example with your forum shortname
-    var disqus_identifier = 'cake';
-    var disqus_title = 'Cake';
-    var disqus_url = 'http://host.com/posts/cake';
+    var disqus_identifier = 'vs-code-settings';
+    var disqus_title = 'VS Code Settings';
+    var disqus_url = 'http://host.com/posts/vs-code-settings';
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

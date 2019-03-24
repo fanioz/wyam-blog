@@ -5,8 +5,99 @@
 		<link>http://host.com/</link>
 		<description>Welcome!</description>
 		<copyright>2019</copyright>
-		<pubDate>Sat, 16 Mar 2019 08:23:50 GMT</pubDate>
-		<lastBuildDate>Sat, 16 Mar 2019 08:23:50 GMT</lastBuildDate>
+		<pubDate>Sun, 24 Mar 2019 12:07:04 GMT</pubDate>
+		<lastBuildDate>Sun, 24 Mar 2019 12:07:04 GMT</lastBuildDate>
+		<item>
+			<title>VS Code Settings</title>
+			<link>http://host.com/posts/vs-code-settings</link>
+			<description>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;</description>
+			<author>Johan Vergeer</author>
+			<guid>http://host.com/posts/vs-code-settings</guid>
+			<pubDate>Sun, 24 Mar 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;
+&lt;h1 id="auto-save"&gt;Auto save&lt;/h1&gt;
+&lt;p&gt;Most of the time I like my IDE to save files automatically instead of having to save each and every file independently. I know, I can save all files, but that's still more work that letting the IDE do it.&lt;/p&gt;
+&lt;p&gt;To configure this, just add the following to the main object in &lt;code&gt;settings.json&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-json"&gt;&amp;quot;files.autoSave&amp;quot;: &amp;quot;afterDelay&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>VS Code Extensions</title>
+			<link>http://host.com/posts/vs-code-extensions</link>
+			<description>&lt;p&gt;One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.&lt;/p&gt;</description>
+			<author>Johan Vergeer</author>
+			<guid>http://host.com/posts/vs-code-extensions</guid>
+			<pubDate>Sun, 24 Mar 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.&lt;/p&gt;
+&lt;p&gt;Since all extensions provide pretty to very good documentation, I won't go into too much detail about them.&lt;/p&gt;
+&lt;h1 id="html-and-css"&gt;HTML and CSS&lt;/h1&gt;
+&lt;h2 id="emmet"&gt;Emmet&lt;/h2&gt;
+&lt;p&gt;Emmit is already pre installed on VS Code, and it helps you to create HTML and CSS really quickly.&lt;/p&gt;
+&lt;h2 id="live-server"&gt;Live Server&lt;/h2&gt;
+&lt;p&gt;Makes developing pure HTML and CSS websites a lot easier.&lt;/p&gt;
+&lt;h2 id="css-peek"&gt;CSS Peek&lt;/h2&gt;
+&lt;p&gt;Allows you to see &lt;strong&gt;and edit&lt;/strong&gt; CSS from a mini window from your HTML.&lt;/p&gt;
+&lt;p&gt;After installing, when you hit &lt;code&gt;F12&lt;/code&gt;, it opens a mini window that allows you to edit the CSS right away without leaving the HTML. Hit &lt;code&gt;Esc&lt;/code&gt; to get out of it.&lt;/p&gt;
+&lt;h1 id="themes"&gt;Themes&lt;/h1&gt;
+&lt;h2 id="material-theme"&gt;Material Theme&lt;/h2&gt;
+&lt;p&gt;One of the most popular themes for VS Code. Just search for &lt;code&gt;Material Theme&lt;/code&gt; in the extensions Marketplace. It comes with several different looks.&lt;/p&gt;
+&lt;p&gt;To change the theme you can use &lt;code&gt;Ctrl+k+t&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id="code-highlighting-and-formatting"&gt;Code Highlighting and formatting&lt;/h1&gt;
+&lt;h2 id="color-highlight"&gt;Color Highlight&lt;/h2&gt;
+&lt;p&gt;This plugin highlights RGB or Hex colors right in the editor. You can change the marker type in settings → Color highlight.&lt;/p&gt;
+&lt;h2 id="bracket-pair-colorizer-2"&gt;Bracket pair colorizer 2&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Bracket pair colorizer 2&lt;/em&gt; is the successor of the very popular &lt;em&gt;Bracket pair colorizer&lt;/em&gt; extension.&lt;/p&gt;
+&lt;p&gt;It colorizes the brackets in programming languages so you can see matching brackets better. In &lt;code&gt;settings.json&lt;/code&gt; you can set the colors to be used for each level.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-json"&gt;    &amp;quot;bracket-pair-colorizer-2.colors&amp;quot;: [
+        &amp;quot;#00BCD4&amp;quot;,
+        &amp;quot;#CDDC39&amp;quot;,
+        &amp;quot;#EC407A&amp;quot;,
+        &amp;quot;#9C27B0&amp;quot;
+    ]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can changes these colors to your liking.&lt;/p&gt;
+&lt;h2 id="prettier-code-formatter"&gt;Prettier - Code Formatter&lt;/h2&gt;
+&lt;p&gt;There are a couple of extensions that will make your code prettier. The most popular is &lt;strong&gt;Prettier - Code Formatter&lt;/strong&gt;. It does exactly what it says, it makes your code prettier.&lt;/p&gt;
+&lt;h1 id="snippets"&gt;Snippets&lt;/h1&gt;
+&lt;p&gt;There are several extensions that use can use to create snippets. I don't use them very often, but to some people they can be very useful.
+Just search for a snippet library for your language and install it.&lt;/p&gt;
+&lt;h1 id="git"&gt;Git&lt;/h1&gt;
+&lt;h2 id="git-project-manager"&gt;Git Project Manager&lt;/h2&gt;
+&lt;p&gt;Allows you to change easily between git projects.&lt;/p&gt;
+&lt;h2 id="gitlens"&gt;GitLens&lt;/h2&gt;
+&lt;p&gt;GitLens supercharges the Git capabilities built into Visual Studio Code. It helps you to visualize code authorship at a glance via Git blame annotations and code lens, seamlessly navigate and explore Git repositories, gain valuable insights via powerful comparison commands, and so much more.&lt;/p&gt;
+&lt;h2 id="git-graph"&gt;Git Graph&lt;/h2&gt;
+&lt;p&gt;View a Git Graph of your repository, and perform Git actions from the graph.&lt;/p&gt;
+&lt;h1 id="docfx"&gt;DocFX&lt;/h1&gt;
+&lt;h2 id="docfx-assistant"&gt;DocFX Assistant&lt;/h2&gt;
+&lt;p&gt;An extension for VS Code that provides tools for authoring content using Microsoft DocFX.&lt;/p&gt;
+&lt;h1 id="markdown"&gt;Markdown&lt;/h1&gt;
+&lt;h2 id="markdown-all-in-one"&gt;Markdown All in One&lt;/h2&gt;
+&lt;p&gt;All you need for Markdown (keyboard shortcuts, table of contents, auto preview and more).&lt;/p&gt;
+&lt;h2 id="markdown-table-formatter"&gt;Markdown Table Formatter&lt;/h2&gt;
+&lt;p&gt;A simple markdown plugin to format tables.&lt;/p&gt;
+&lt;h1 id="yaml"&gt;YAML&lt;/h1&gt;
+&lt;p&gt;YAML Language Support by Red Hat, with built-in Kubernetes and Kedge syntax support&lt;/p&gt;
+&lt;h1 id="xml"&gt;XML&lt;/h1&gt;
+&lt;p&gt;XML Language Support by Red Hat&lt;/p&gt;
+&lt;h1 id="powershell"&gt;PowerShell&lt;/h1&gt;
+&lt;p&gt;Develop PowerShell scripts in Visual Studio Code!&lt;/p&gt;
+</content:encoded>
+		</item>
+		<item>
+			<title>Useful links</title>
+			<link>http://host.com/posts/useful-links</link>
+			<description>&lt;p&gt;This page contains some useful links that I personally use.&lt;/p&gt;</description>
+			<author>Johan Vergeer</author>
+			<guid>http://host.com/posts/useful-links</guid>
+			<pubDate>Sun, 17 Mar 2019 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;p&gt;This page contains some useful links that I personally use.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://live.asp.net/"&gt;ASP.NET Community Standup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded>
+		</item>
 		<item>
 			<title>Wyam, Azure DevOps and GitHub Pages</title>
 			<link>http://host.com/posts/wyam-azure-devops</link>
