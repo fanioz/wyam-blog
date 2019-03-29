@@ -1,23 +1,46 @@
 <div class="main main-raised">
     <div class="section section-basic">
         <div class="container">
-            <div class="title mb-5">
-                <h1>Latest posts</h1>
-            </div>
-
-            @foreach(IDocument post in Model.DocumentList(Keys.PageDocuments))
-            {
-                <div class="card mb-5">
-                    <div class="card-header card-header-primary">
-                        @post.WithoutSettings.String(BlogKeys.Title)
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="title mb-5">
+                        <h1>Latest posts</h1>
                     </div>
-                    <div class="card-body">
-                            @Html.Raw(post.String(BlogKeys.Excerpt))
-                        <a href="@Context.GetLink(post)">Keep reading</a>  
+
+                    @foreach(IDocument post in Model.DocumentList(Keys.PageDocuments))
+                    {
+                        <div class="card mb-5">
+                            <div class="card-header card-header-primary">
+                                @post.WithoutSettings.String(BlogKeys.Title)
+                            </div>
+                            <div class="card-body">
+                                    @Html.Raw(post.String(BlogKeys.Excerpt))
+                                <a href="@Context.GetLink(post)">Keep reading</a>  
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-4">
+                    
+                    <h1>Tags</h1>
+
+                    <div>
+                        @foreach (IDocument tagDocument in Documents[Blog.Tags]
+                            .GroupBy(x => x.String(BlogKeys.Tag)).Select(x => x.Where(p => p.Get<int>(Keys.CurrentPage) == 1).First())
+                            .OrderByDescending(x => x.Get<int>(Keys.TotalItems)))
+                        { 
+                            string tagName = tagDocument.String(BlogKeys.Tag);
+                            string postCount = tagDocument.String(Keys.TotalItems);
+                            var firstTagDoc = tagDocument.DocumentList(Keys.PageDocuments).FirstOrDefault();
+
+                            <a href="@Context.GetLink(tagDocument)" class="badge badge-pill badge-lg badge-primary">
+                                @tagName (@postCount)
+                            </a>
+                        }
                     </div>
                 </div>
-            }
-
+            </div>
 
             @if(Model.Bool(Keys.HasPreviousPage)) {
                 <a href="@(Context.GetLink(Model.Document(Keys.PreviousPage)))"><span aria-hidden="true">&larr;</span> Newer</a> 
