@@ -1,6 +1,6 @@
 #recipe Blog
 
-#t Trophy
+#t BlogTemplate
 
 #n Wyam.Highlight
 #n Wyam.SearchIndex
