@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Cake
+        Csharp
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     
@@ -80,112 +80,61 @@
     <div class="section section-basic">
         <div class="container">
               
-<h2>Cake</h2>
-<h3>Published 3/15/2019</h3>
+<div class="title mb-5">
+    <h1>Posts for Csharp</h1>
+</div>
 
 
-        <a href="/tags/Cake">Cake</a> 
-        <a href="/tags/Csharp">Csharp</a> 
 
-<a href="/posts">Back To posts</a>
 
-<p>This page contains some snippets and links I refer to when I'm creating Cake scripts.
+<div class="card mb-5">
+    <div class="card-header card-header-primary">
+        Wyam, Azure DevOps and GitHub Pages
+    </div>
+    <div class="card-body">
+            <p>Publishing a static site with a static content generator can be fully automated. In this case I'm using <a href="https://wyam.io/">Wyam</a>, a static site generator, <a href="https://pages.github.com/">GitHub Pages</a> for hosting and <a href="https://azure.microsoft.com/en-us/solutions/devops/">Azure DevOps</a> for build and deployment. Of course there are a ton of other ways to do this, but right now I'll show you the way that I chose to use.</p>
+        <a href="/posts/wyam-azure-devops">Keep reading <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>  
+    </div>
+    <div class="card-footer">
+    <span class="mr-3"><i class="fa fa-user"></i> Johan Vergeer</span>
+    <span><i class="fa fa-calendar"></i> <time datetime="YYYY-03-DD">Saturday, March 16, 2019</time></span> 
+    </div>
+</div>
+
+
+<div class="card mb-5">
+    <div class="card-header card-header-primary">
+        Cake
+    </div>
+    <div class="card-body">
+            <p>This page contains some snippets and links I refer to when I'm creating Cake scripts.
 Most of this information can be found on the <a href="https://cakebuild.net/">Cake website</a>,
 but this should give a better overview of some things I personally use.</p>
-<h1 id="gitignore">.gitignore</h1>
-<p>The  <code>.gitignore</code> file should contain the following lines:</p>
-<pre><code class="language-plaintext">tools/*
-!tools/packages.config
-</code></pre>
-<h1 id="build.cake-content">build.cake content</h1>
-<h2 id="arguments">Arguments</h2>
-<p>This defines a <code>-target</code> argument which, when omitted, defaults to <em>Default</em></p>
-<pre><code class="language-csharp">var target = Argument(&quot;target&quot;, &quot;Default&quot;)
-</code></pre>
-<p>This defines a <code>-configuration</code> argument which, when omitted, defaults to <em>Release</em></p>
-<pre><code class="language-csharp">var configuration = Argument(&quot;configuration&quot;, &quot;Release&quot;)
-</code></pre>
-<h2 id="tasks">Tasks</h2>
-<p>A Cake file contains <em>Tasks</em> that we want to execute:</p>
-<pre><code class="language-csharp">Task(&quot;Default&quot;)
-    .IsDependentOn(&quot;Dotnet-Core-Package&quot;)
-</code></pre>
-<h3 id="cleandirectory-cleandirectories">CleanDirectory / CleanDirectories</h3>
-<p>These aliases make sure that the directory or directories exist, and that they are empty.</p>
-<pre><code class="language-csharp">Task(&quot;Clean&quot;)
-    .Does(() =&gt; {
-        CleanDirectory(&quot;./BuildArtifacts&quot;);
-    });
-</code></pre>
-<h3 id="dotnetcorerestore">DotNetCoreRestore</h3>
-<p>In the example below is <code>DotNetCoreRestore</code> an alias, which is running the <em>dotnet cli</em> with the <code>restore</code> command.</p>
-<pre><code class="language-csharp">Task(&quot;Dotnet-Core-Package&quot;)
-    .Does(() =&gt; {
-        DotNetCoreRestore(
-            &quot;./src/project/project.csproj&quot;,
-            new DotNetCoreRestoreSettings {
-                PackagesDirectory = &quot;./src/packages&quot;
-            }
-        );
-    });
-</code></pre>
-<h3 id="dotnetcorebuild">DotNetCoreBuild</h3>
-<p>In the next example the <code>DotNetCoreBuild</code> is an alias, which is running the <em>dotnet cli</em> with the <code>build</code> command.</p>
-<pre><code class="language-csharp">Task(&quot;Build&quot;)
-    .IsDependentOn(&quot;Dotnet-Core-Build&quot;)
-    .Does(() =&gt; {
-        var settings = new DotNetCoreBuildSettings {
-            Configuration = configuration,
-            NoRestore = true
-        };
-
-        DotNetCoreBuild(&quot;./src/project/project.csproj&quot;);
-    });
-</code></pre>
-<h3 id="dotnetcorepublish">DotNetCorePublish</h3>
-<p>Publish to the local file system.</p>
-<pre><code class="language-csharp">Task(&quot;Publish&quot;)
-    .IsDependentOn(&quot;Build&quot;)
-    .Does(() =&gt; {
-        var settings = new DotNetCorePublishSettings {
-            Configuration = configuration,
-            OutputDirectory = &quot;./BuildArtifacts&quot;
-        };
-
-        DotNetCorePublish(&quot;./src/project/project.csproj&quot;, settings);
-    });
-</code></pre>
-<h3 id="aliases">Aliases</h3>
-<p>Cake supports something called <a href="https://cakebuild.net/docs/fundamentals/aliases">script aliases</a>. Script aliases are convenience methods that are easily accessible directly from a Cake script. Every single <a href="https://cakebuild.net/dsl/">DSL method</a> in Cake is implemented like an alias method.</p>
-<h2 id="runtarget">RunTarget</h2>
-<p>The end of build.cake should contain the following line to run:</p>
-<pre><code class="language-csharp">RunTarget(target);
-</code></pre>
-<p>This will make sure the <code>tools</code> directory is not included in source control, except for <code>packages.config</code>,
-which contains the Cake version we're using.</p>
-<h1 id="what-is-a-build">What is a build?</h1>
-<h2 id="typical-build-workflow">Typical build workflow</h2>
-<ol>
-<li>Package restore</li>
-<li>Clean</li>
-<li>Unit Tests</li>
-<li>Test Coverage (NCover, OpenCover)</li>
-<li>Static analysis
-<ol>
-<li>StyleCop</li>
-<li>FxCop</li>
-<li>DupFinder</li>
-<li>InspectCode</li>
-</ol>
-</li>
-<li>Package</li>
-<li>Publish</li>
-</ol>
-<h1 id="intellisense">Intellisense</h1>
-<p>To have Intellisense in VS Code for Cake, just run the <code>Cake: Install Intellisense Support</code> and <code>OmniSharp: Restart OmniSharp</code> commands in VS Code.</p>
+        <a href="/posts/cake">Keep reading <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>  
+    </div>
+    <div class="card-footer">
+    <span class="mr-3"><i class="fa fa-user"></i> Johan Vergeer</span>
+    <span><i class="fa fa-calendar"></i> <time datetime="YYYY-03-DD">Friday, March 15, 2019</time></span> 
+    </div>
+</div>
 
 
+<div class="card mb-5">
+    <div class="card-header card-header-primary">
+        Creating styled boxes for a Wyam site
+    </div>
+    <div class="card-body">
+            <p>Sometimes you want to indicate a piece of information is more important then the rest. To do this you can create styled boxes with CSS. I used an example from <a href="https://www.madcapsoftware.com/blog/2017/08/17/css-tip-creating-styled-boxes-notes-warnings-examples-tips/">madcapsoftware.com</a> and applied it to Wyam.</p>
+        <a href="/posts/creating-styled-boxes">Keep reading <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>  
+    </div>
+    <div class="card-footer">
+    <span class="mr-3"><i class="fa fa-user"></i> Johan Vergeer</span>
+    <span><i class="fa fa-calendar"></i> <time datetime="YYYY-03-DD">Monday, March 11, 2019</time></span> 
+    </div>
+</div>
 
+
+<a href="/posts">Back To posts</a>
         </div>
     </div>
 </div>

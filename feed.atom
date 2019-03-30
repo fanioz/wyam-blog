@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-	<id>http://host.com/</id>
-	<title>My Blog</title>
-	<link rel="self" href="http://host.com/" />
+	<id>http://johanvergeer.github.io/</id>
+	<title>I'm Johan</title>
+	<link rel="self" href="http://johanvergeer.github.io/" />
 	<rights>2019</rights>
-	<updated>2019-03-24T14:33:55Z</updated>
+	<updated>2019-03-30T11:24:59Z</updated>
 	<subtitle>Welcome!</subtitle>
 	<entry>
-		<id>http://host.com/posts/vs-code-settings</id>
+		<id>http://johanvergeer.github.io/posts/vs-code-settings</id>
 		<title>VS Code Settings</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/vs-code-settings" />
+		<link href="http://johanvergeer.github.io/posts/vs-code-settings" />
 		<updated>2019-03-24T00:00:00Z</updated>
 		<content>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;
 &lt;h1 id="auto-save"&gt;Auto save&lt;/h1&gt;
@@ -24,12 +24,12 @@
 		<summary>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/uml-sequence-diagram-exception-handling</id>
+		<id>http://johanvergeer.github.io/posts/uml-sequence-diagram-exception-handling</id>
 		<title>Exception handling in UML Sequence Diagram</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/uml-sequence-diagram-exception-handling" />
+		<link href="http://johanvergeer.github.io/posts/uml-sequence-diagram-exception-handling" />
 		<updated>2019-03-24T00:00:00Z</updated>
 		<content>&lt;blockquote class="blockquote"&gt;
 &lt;p&gt;UML provides neither notation to model exception handling in sequence diagrams nor any reasoning why it is absent. Some clumsy approaches to model try-catch blocks are by utilizing &lt;strong&gt;combined fragments - alt&lt;/strong&gt; (alternatives) and &lt;strong&gt;breaks&lt;/strong&gt;, while adding stereotypes for &lt;strong&gt;reply messages&lt;/strong&gt; representing thrown exceptions. There are several proposed notations for exception handling. &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
@@ -71,12 +71,12 @@
 		<summary>&lt;p&gt;UML provides neither notation to model exception handling in sequence diagrams nor any reasoning why it is absent. Some clumsy approaches to model try-catch blocks are by utilizing &lt;strong&gt;combined fragments - alt&lt;/strong&gt; (alternatives) and &lt;strong&gt;breaks&lt;/strong&gt;, while adding stereotypes for &lt;strong&gt;reply messages&lt;/strong&gt; representing thrown exceptions. There are several proposed notations for exception handling. &lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/vs-code-extensions</id>
+		<id>http://johanvergeer.github.io/posts/vs-code-extensions</id>
 		<title>VS Code Extensions</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/vs-code-extensions" />
+		<link href="http://johanvergeer.github.io/posts/vs-code-extensions" />
 		<updated>2019-03-24T00:00:00Z</updated>
 		<content>&lt;p&gt;One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.&lt;/p&gt;
 &lt;p&gt;Since all extensions provide pretty to very good documentation, I won't go into too much detail about them.&lt;/p&gt;
@@ -136,12 +136,12 @@ Just search for a snippet library for your language and install it.&lt;/p&gt;
 		<summary>&lt;p&gt;One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/useful-links</id>
+		<id>http://johanvergeer.github.io/posts/useful-links</id>
 		<title>Useful links</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/useful-links" />
+		<link href="http://johanvergeer.github.io/posts/useful-links" />
 		<updated>2019-03-17T00:00:00Z</updated>
 		<content>&lt;p&gt;This page contains some useful links that I personally use.&lt;/p&gt;
 &lt;ul&gt;
@@ -151,12 +151,12 @@ Just search for a snippet library for your language and install it.&lt;/p&gt;
 		<summary>&lt;p&gt;This page contains some useful links that I personally use.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/wyam-azure-devops</id>
+		<id>http://johanvergeer.github.io/posts/wyam-azure-devops</id>
 		<title>Wyam, Azure DevOps and GitHub Pages</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/wyam-azure-devops" />
+		<link href="http://johanvergeer.github.io/posts/wyam-azure-devops" />
 		<updated>2019-03-16T00:00:00Z</updated>
 		<content>&lt;p&gt;Publishing a static site with a static content generator can be fully automated. In this case I'm using &lt;a href="https://wyam.io/"&gt;Wyam&lt;/a&gt;, a static site generator, &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; for hosting and &lt;a href="https://azure.microsoft.com/en-us/solutions/devops/"&gt;Azure DevOps&lt;/a&gt; for build and deployment. Of course there are a ton of other ways to do this, but right now I'll show you the way that I chose to use.&lt;/p&gt;
 &lt;p&gt;This post will mainly focus on automated build and deployment, since there are a lot of great online resources on how to setup Wyam on your local machine.&lt;/p&gt;
@@ -468,12 +468,12 @@ PS &amp;gt; git push
 		<summary>&lt;p&gt;Publishing a static site with a static content generator can be fully automated. In this case I'm using &lt;a href="https://wyam.io/"&gt;Wyam&lt;/a&gt;, a static site generator, &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt; for hosting and &lt;a href="https://azure.microsoft.com/en-us/solutions/devops/"&gt;Azure DevOps&lt;/a&gt; for build and deployment. Of course there are a ton of other ways to do this, but right now I'll show you the way that I chose to use.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/cake</id>
+		<id>http://johanvergeer.github.io/posts/cake</id>
 		<title>Cake</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/cake" />
+		<link href="http://johanvergeer.github.io/posts/cake" />
 		<updated>2019-03-15T00:00:00Z</updated>
 		<content>&lt;p&gt;This page contains some snippets and links I refer to when I'm creating Cake scripts.
 Most of this information can be found on the &lt;a href="https://cakebuild.net/"&gt;Cake website&lt;/a&gt;,
@@ -575,12 +575,12 @@ Most of this information can be found on the &lt;a href="https://cakebuild.net/"
 but this should give a better overview of some things I personally use.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://host.com/posts/creating-styled-boxes</id>
+		<id>http://johanvergeer.github.io/posts/creating-styled-boxes</id>
 		<title>Creating styled boxes for a Wyam site</title>
 		<author>
 			<name>Johan Vergeer</name>
 		</author>
-		<link href="http://host.com/posts/creating-styled-boxes" />
+		<link href="http://johanvergeer.github.io/posts/creating-styled-boxes" />
 		<updated>2019-03-11T00:00:00Z</updated>
 		<content>&lt;p&gt;Sometimes you want to indicate a piece of information is more important then the rest. To do this you can create styled boxes with CSS. I used an example from &lt;a href="https://www.madcapsoftware.com/blog/2017/08/17/css-tip-creating-styled-boxes-notes-warnings-examples-tips/"&gt;madcapsoftware.com&lt;/a&gt; and applied it to Wyam.&lt;/p&gt;
 &lt;p&gt;I did not create a NuGet package for this functionality (yet). But it is fairly simple to create the boxes yourself.&lt;/p&gt;
