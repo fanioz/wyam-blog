@@ -8,4 +8,14 @@ year: 2018
 month: 1
 day: 30
 url: https://docs.microsoft.com/en-us/dotnet/csharp/
+---
+name: CSHARP_GUIDE_2
+authors: 
+  - NextTurns
+webPageName: C# Guide
+websiteName: Microsoft .NET
+year: 2018
+month: 1
+day: 30
+url: https://docs.microsoft.com/en-us/dotnet/csharp/
 ...

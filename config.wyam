@@ -4,6 +4,14 @@
 
 #n Wyam.SearchIndex
 
+using System.Collections.Generic;
+using System.IO;
+
+using YamlDotNet.Core;
+using YamlDotNet.Core.Events;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "johanvergeer.github.io";
 Settings[BlogKeys.Title] = "I'm Johan";
@@ -28,7 +36,7 @@ Pipelines.Insert(
 
 class GlossaryItem {
 	public string Name { get; set; }
-	public System.Collections.Generic.IEnumerable<string> Authors { get; set; }
+	public IEnumerable<string> Authors { get; set; }
 	public string WebPageName { get; set; }
 	public string WebsiteName { get; set; }
 	public int Year { get; set; }
@@ -38,26 +46,30 @@ class GlossaryItem {
 }
 
 class Glossary {
-	public System.Collections.Generic.IEnumerable<GlossaryItem> Items { get; set; }
+	public List<GlossaryItem> Items { get; set; } = new List<GlossaryItem>();
 }
 
-using(var glossaryInput = new System.IO.StreamReader("input/glossary.yml"))
-{
-	var yamlNamingConvention = new YamlDotNet.Serialization.NamingConventions.CamelCaseNamingConvention();
+var glossary = new Glossary();
 
-	var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
+using(var glossaryInput = new StreamReader("input/glossary.yml"))
+{
+	var yamlNamingConvention = new CamelCaseNamingConvention();
+
+	var deserializer = new DeserializerBuilder()
 		.WithNamingConvention(yamlNamingConvention)
 		.Build();
 
-	var glossary = deserializer.Deserialize<GlossaryItem>(glossaryInput);
+	var parser = new Parser(glossaryInput);
 
-	if (glossary == null)
+	// Consume the stream start event "manually"
+	parser.Expect<StreamStart>();
+
+	while (parser.Accept<DocumentStart>())
 	{
-		System.Console.WriteLine("Glossary is not set");
-	}
-	else
-	{
-		System.Console.WriteLine(glossary.GetType());
+		// Deserialize the document
+		var glossaryItem = deserializer.Deserialize<GlossaryItem>(parser);
+		glossary.Items.Add(glossaryItem);
+		System.Console.WriteLine(glossaryItem.Name);
 	}
 }
 
