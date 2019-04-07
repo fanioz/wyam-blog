@@ -49,7 +49,7 @@ class Glossary {
 	public List<GlossaryItem> Items { get; set; } = new List<GlossaryItem>();
 }
 
-var glossary = new Glossary();
+var glossary = new Dictionary<string, GlossaryItem>();
 
 using(var glossaryInput = new StreamReader("input/glossary.yml"))
 {
@@ -68,7 +68,7 @@ using(var glossaryInput = new StreamReader("input/glossary.yml"))
 	{
 		// Deserialize the document
 		var glossaryItem = deserializer.Deserialize<GlossaryItem>(parser);
-		glossary.Items.Add(glossaryItem);
+		glossary.Add(glossaryItem.Name, glossaryItem);
 		System.Console.WriteLine(glossaryItem.Name);
 	}
 }
