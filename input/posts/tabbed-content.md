@@ -5,15 +5,42 @@ Tags: [General]
 author: Johan Vergeer
 ---
 
-MyFoo
 
-^"tabbed-content-html.html"
+
+ShortcodeCollection.Add("TabGroup", (string x) => $@"
+<div class='tabGroup' id='tabgroup_foobar' data-bi-name='tab-group'>
+	{x}
+</div>
+");
+
+ShortcodeCollection.Add("TabList", (string x) => $@"
+<ul role='tablist'>
+	{x}
+</ul>
+");
+
+ShortcodeCollection.Add("Tab", (string x) => $@"
+<li role='presentation'>
+	<a href='#tabpanel_CeZOj-G++Q_tabid-1' role='tab' aria-controls='tabpanel_CeZOj-G++Q_tabid-1' data-tab='tabid-1' tabindex='0' aria-selected='true' data-bi-name='tab'>
+		{x}
+	</a>
+</li>
+");
+
 
 # This page should contain tabbed content
 
 # DocFx Nav
 
 ## Group 1
+
+<?# TabGroup ?>
+    <?# TabList ?>
+        <?# Tab ?>
+            Note
+        <?#/ Tab ?>
+    <?#/ TabList ?>
+<?#/ TabGroup ?>
 
 <div class="tabGroup" id="tabgroup_CeZOj-G++Q" data-bi-name="tab-group">
     <ul role="tablist">
