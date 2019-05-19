@@ -3,14 +3,122 @@
 #t BlogTemplate
 
 #n Wyam.SearchIndex
+//#n HtmlBuilders
 
-using System.Collections.Generic;
-using System.IO;
+using	 System.IO;
+using System.Xml.Linq;
 
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
+
+public class Card : IShortcode
+{
+	/// <inheritdoc />
+	public IShortcodeResult Execute(KeyValuePair<string, string>[] args, string content, IDocument document, IExecutionContext context)
+	{
+		ConvertingDictionary arguments = args.ToDictionary(
+			context,
+			"Src",
+			"Link",
+			"Target",
+			"Rel",
+			"Alt",
+			"Class",
+			"Height",
+			"Width");
+
+		XElement root = new XElement(
+			"div",
+			new XAttribute("class", "row")
+		);
+
+		XElement col = new XElement(
+			"div",
+			new XAttribute("class", "col-md-12")
+		);
+
+		XElement card = new XElement(
+			"div",
+			new XAttribute("class", "card")
+		);
+
+		root.Add(col);
+		col.Add(card);
+		card.Add(_createCardHeader("Uncle Bob"));
+		card.Add(_createCardBody(content));
+
+		// Image link
+		// XElement imageLink = arguments.XElement("a", "link", x => new[]
+		// {
+		// 	new XAttribute("href", context.GetLink(x)),
+		// 	arguments.XAttribute("target"),
+		// 	arguments.XAttribute("rel")
+		// });
+
+		// // Image
+		// XElement image = arguments.XElement("img", "src", x => new[]
+		// {
+		// 	new XAttribute("src", context.GetLink(x)),
+		// 	arguments.XAttribute("alt"),
+		// 	arguments.XAttribute("height"),
+		// 	arguments.XAttribute("width")
+		// });
+		// if (imageLink != null && image != null)
+		// {
+		// 	imageLink.Add(image);
+		// 	figure.Add(imageLink);
+		// }
+		// else if (image != null)
+		// {
+		// 	figure.Add(image);
+		// }
+
+		// // Caption
+		// if (content != null)
+		// {
+		// 	figure.Add(new XElement("figcaption", content));
+		// }
+
+		return context.GetShortcodeResult(root.ToString());
+	}
+
+	private XElement _createCardHeader(string title)
+	{
+		XElement cardHeader = new XElement(
+			"div",
+			new XAttribute("class", "card-header card-header-text card-header-primary")
+		);
+
+		XElement cardHeaderText = new XElement(
+			"div",
+			new XAttribute("class", "card-text")
+		);
+
+		XElement cardTitle = new XElement(
+			"div",
+			new XAttribute("Class", "card-title"),
+			title
+		);
+
+		cardHeader.Add(cardHeaderText);
+		cardHeaderText.Add(cardTitle);
+
+		return cardHeader;
+	}
+
+	private XElement _createCardBody(string content)
+	{
+		XElement cardBody = new XElement(
+			"div",
+			new XAttribute("class", "card-body"),
+			content.Trim()
+		);
+
+		return cardBody;
+	}
+}
 
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "johanvergeer.github.io";
@@ -89,3 +197,5 @@ ShortcodeCollection.Add("Note", (string x) => $"<div class='box box-note'>{x}</d
 ShortcodeCollection.Add("Warning", (string x) => $"<div class='box box-warning'>{x}</div>");
 ShortcodeCollection.Add("Example", (string x) => $"<div class='box box-example'>{x}</div>");
 ShortcodeCollection.Add("Tip", (string x) => $"<div class='box box-tip'>{x}</div>");
+ShortcodeCollection.Add(typeof(Card));
+
