@@ -4,8 +4,62 @@
 	<title>I'm Johan</title>
 	<link rel="self" href="http://johanvergeer.github.io/" />
 	<rights>2019</rights>
-	<updated>2019-04-11T11:53:01Z</updated>
+	<updated>2019-05-19T15:18:09Z</updated>
 	<subtitle>Welcome!</subtitle>
+	<entry>
+		<id>http://johanvergeer.github.io/posts/asp-net-core-api-unit-tests</id>
+		<title>ASP.NET Core API Unit Tests</title>
+		<author>
+			<name>Johan Vergeer</name>
+		</author>
+		<link href="http://johanvergeer.github.io/posts/asp-net-core-api-unit-tests" />
+		<updated>2019-05-19T00:00:00Z</updated>
+		<content>&lt;p&gt;ASP.NET Core API Controllers are just classes, which means they can be unit tested.&lt;/p&gt;
+&lt;p&gt;This can be explained best with an example.&lt;/p&gt;
+&lt;h3 id="person-model"&gt;Person Model&lt;/h3&gt;
+&lt;p&gt;We'll start off with a &lt;code&gt;Person&lt;/code&gt;  model.&lt;/p&gt;
+&lt;?# Gist 300a7aebba5bfd1b62f4fb2f468533ca /?&gt;
+&lt;p&gt;This model has a &lt;code&gt;Name&lt;/code&gt; and an &lt;code&gt;Age&lt;/code&gt; property. It also has an &lt;code&gt;IsValid&lt;/code&gt; property, returning whether the model is in a valid state.
+This last property will be used later when we will work on the &lt;code&gt;Post&lt;/code&gt; request.&lt;/p&gt;
+&lt;h3 id="ipersonrepository"&gt;IPersonRepository&lt;/h3&gt;
+&lt;p&gt;I have only created the repository interface because an implementation is not required for these tests.
+The methods are self-explanatory so I won't go into any detail here.&lt;/p&gt;
+&lt;?# Gist 89cb91b85a273bd5a472900f56988edf /?&gt;
+&lt;h3 id="personcontroller"&gt;PersonController&lt;/h3&gt;
+&lt;p&gt;The &lt;code&gt;PersonController&lt;/code&gt; serves as the API endpoint.
+The &lt;code&gt;Get()&lt;/code&gt; method returns all people from the repository, and the &lt;code&gt;Post()&lt;/code&gt; method allows a new &lt;code&gt;Person&lt;/code&gt; to be added to the repository. Note a &lt;code&gt;BadRequest&lt;/code&gt; is returned when the &lt;code&gt;IsValid&lt;/code&gt; property on the &lt;code&gt;Person&lt;/code&gt; model is &lt;code&gt;false&lt;/code&gt;. Also note the &lt;code&gt;IPersonRepository&lt;/code&gt; interface is passed in to the constructor. I'll get back on this later when we'll look at the tests.&lt;/p&gt;
+&lt;?# Gist b515c0ff18a6bd695080f0c01190508d /?&gt;
+&lt;h2 id="tests"&gt;Tests&lt;/h2&gt;
+&lt;?# Note ?&gt;
+&lt;p&gt;I'm using &lt;a href="https://xunit.net/"&gt;xUnit.Net&lt;/a&gt;, &lt;a href="https://fluentassertions.com/"&gt;FluentAssertions&lt;/a&gt; and &lt;a href="https://github.com/Moq/moq4/wiki/Quickstart"&gt;Moq&lt;/a&gt; for these tests.&lt;/p&gt;
+&lt;?#/ Note ?&gt;
+&lt;p&gt;Let's have a look at the tests. As I stated before, we're passing in the &lt;code&gt;IPersonRepository&lt;/code&gt; interface to the constructor of &lt;code&gt;PersonController&lt;/code&gt;. But we don't have an implementation for &lt;code&gt;IPersonRepository&lt;/code&gt;. This is on purpose, sinse we want to test the controllers implementation, and not an implementation of &lt;code&gt;IPersonRepository&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For this reason we'll use &lt;a href="https://github.com/Moq/moq4/wiki/Quickstart"&gt;Moq&lt;/a&gt;, which is an awesome library we will use to create a mock &lt;code&gt;IPersonRepository&lt;/code&gt;. The following code snippet shows how mock the repository is instantiated.&lt;/p&gt;
+&lt;?# Gist 11795a249d1589e0bd43ba3119366e47 /?&gt;
+&lt;h3 id="get-all-people-empty-list"&gt;Get all people - empty list&lt;/h3&gt;
+&lt;p&gt;For the first test we'll expect an empty list of &lt;code&gt;Person&lt;/code&gt;. Before creating the &lt;code&gt;PersonController&lt;/code&gt;, we have to setup the &lt;code&gt;Mock&lt;/code&gt; object to return an empty &lt;code&gt;List&amp;lt;Person&amp;gt;&lt;/code&gt; when &lt;code&gt;FindAll()&lt;/code&gt; is called.&lt;/p&gt;
+&lt;?# Warning ?&gt;
+&lt;p&gt;If we don't setup the mock, it will return null and throw an &lt;code&gt;ArgumentNullException&lt;/code&gt; when &lt;code&gt;ToList()&lt;/code&gt; is called in the controller.&lt;/p&gt;
+&lt;?#/ Warning ?&gt;
+&lt;p&gt;After the controllers &lt;code&gt;Get()&lt;/code&gt; method is called we assert the expected return type and whether the returned list is really empty.&lt;/p&gt;
+&lt;?# Gist ccafc0ad059dea8e01ff419eb69de555 /?&gt;
+&lt;h3 id="get-all-people-people-are-returned"&gt;Get all people - people are returned&lt;/h3&gt;
+&lt;p&gt;The next test we'll expect three &lt;code&gt;Person&lt;/code&gt; objects. The &lt;code&gt;people&lt;/code&gt; object we created is used in the &lt;code&gt;Returns()&lt;/code&gt; method of the repository setup. This tells Moq to return the people whenever the &lt;code&gt;FindAll()&lt;/code&gt; method is called on &lt;code&gt;IPersonRepository&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;After the controllers &lt;code&gt;Get()&lt;/code&gt; method is called we assert the expected return type again, but this time we expect three &lt;code&gt;Person&lt;/code&gt; objects, which should be equivalent to the &lt;code&gt;people&lt;/code&gt; object we passed into the &lt;code&gt;Returns()&lt;/code&gt; method of the repository setup.&lt;/p&gt;
+&lt;p&gt;Now that this works, let's see how we can add a &lt;code&gt;Person&lt;/code&gt;.&lt;/p&gt;
+&lt;?# Gist 3fda5518c8b97c6fa1c1045df5f22b8b /?&gt;
+&lt;h3 id="post-a-person-person-has-valid-state"&gt;Post a person - Person has valid state&lt;/h3&gt;
+&lt;p&gt;After retrieving people from the API, it would also be nice if we can add people. That will be tested next.&lt;/p&gt;
+&lt;p&gt;In this first test, which is a happy flow, the &lt;code&gt;Person&lt;/code&gt; object will be added. Since the &lt;code&gt;Add()&lt;/code&gt; method on &lt;code&gt;IPersonRepository&lt;/code&gt; doesn't return anything, we don't have to do a setup. So we just &lt;code&gt;Post&lt;/code&gt; a &lt;code&gt;Peron&lt;/code&gt; object, after which we assert whether we response is an &lt;code&gt;OkObjectResult&lt;/code&gt; and has a valid message. One thing we &lt;strong&gt;do&lt;/strong&gt; want to verify here though, is whether the &lt;code&gt;Add()&lt;/code&gt; method was called on &lt;code&gt;IPersonRepository&lt;/code&gt; once and only once.&lt;/p&gt;
+&lt;?# Gist 1602b7cca1ab50b45480f1ffd0f64e98 /?&gt;
+&lt;h3 id="post-a-person-person-has-invalid-state"&gt;Post a person - Person has invalid state&lt;/h3&gt;
+&lt;p&gt;In this last test, we have to see what happens if the &lt;code&gt;Person&lt;/code&gt; doesn't have a valid state, which we'll test by not setting the &lt;code&gt;Name&lt;/code&gt; property. In this case we assert whether the returned result is a &lt;code&gt;BadRequestObjectResult&lt;/code&gt; and has a valid message. A more important assertion to note here is that we verify the &lt;code&gt;Add()&lt;/code&gt; method on &lt;code&gt;IPersonRepository&lt;/code&gt; is &lt;strong&gt;Never&lt;/strong&gt; called.&lt;/p&gt;
+&lt;?# Gist a0d88a8857827cdc7d7ff9c23d698beb /?&gt;
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;As you can see, we can test an API controller without any integration to other components of the application. We didn't even need an implementation for the repository. This way we have a fast and loosely coupled way to test our controllers.&lt;/p&gt;
+</content>
+		<summary>&lt;p&gt;ASP.NET Core API Controllers are just classes, which means they can be unit tested.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<id>http://johanvergeer.github.io/posts/exception-handling</id>
 		<title>Exception handling</title>
@@ -369,30 +423,6 @@ When all is working as expected, your test should pass and you can move on to th
 		<summary>&lt;p&gt;Integration tests ensure that an app's components function correctly at a level that includes the app's supporting infrastructure, such as the database, file system, and network. ASP.NET Core supports integration tests using a unit test framework with a test web host and an in-memory test server.&lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;</summary>
 	</entry>
 	<entry>
-		<id>http://johanvergeer.github.io/posts/vs-code-settings</id>
-		<title>VS Code Settings</title>
-		<author>
-			<name>Johan Vergeer</name>
-		</author>
-		<link href="http://johanvergeer.github.io/posts/vs-code-settings" />
-		<updated>2019-03-24T00:00:00Z</updated>
-		<content>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;
-&lt;h1 id="auto-save"&gt;Auto save&lt;/h1&gt;
-&lt;p&gt;Most of the time I like my IDE to save files automatically instead of having to save each and every file independently. I know, I can save all files, but that's still more work that letting the IDE do it.&lt;/p&gt;
-&lt;p&gt;To configure this, just add the following to the main object in &lt;code&gt;settings.json&lt;/code&gt;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-json"&gt;&amp;quot;files.autoSave&amp;quot;: &amp;quot;afterDelay&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h1 id="associate-language-with-file-extensions"&gt;Associate language with file extensions&lt;/h1&gt;
-&lt;p&gt;As you can read in the &lt;a href="https://code.visualstudio.com/docs/languages/overview#_adding-a-file-extension-to-a-language"&gt;VS Code documentation&lt;/a&gt;, you can set a language for each file extension.&lt;/p&gt;
-&lt;p&gt;In my example, I would like to add the &lt;code&gt;.wyam&lt;/code&gt; file extension to &lt;code&gt;C#&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-json"&gt;&amp;quot;files.associations&amp;quot;: {
-    &amp;quot;*.wyam&amp;quot;: &amp;quot;csharp&amp;quot;
-},
-&lt;/code&gt;&lt;/pre&gt;
-</content>
-		<summary>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;</summary>
-	</entry>
-	<entry>
 		<id>http://johanvergeer.github.io/posts/uml-sequence-diagram-exception-handling</id>
 		<title>Exception handling in UML Sequence Diagram</title>
 		<author>
@@ -503,6 +533,30 @@ Just search for a snippet library for your language and install it.&lt;/p&gt;
 &lt;p&gt;Develop PowerShell scripts in Visual Studio Code!&lt;/p&gt;
 </content>
 		<summary>&lt;p&gt;One of the many great things about VS Code is it's extensibility, and the many extensions that are out there in the marketplace. This is a list of extensions I use and wanted to share with you.&lt;/p&gt;</summary>
+	</entry>
+	<entry>
+		<id>http://johanvergeer.github.io/posts/vs-code-settings</id>
+		<title>VS Code Settings</title>
+		<author>
+			<name>Johan Vergeer</name>
+		</author>
+		<link href="http://johanvergeer.github.io/posts/vs-code-settings" />
+		<updated>2019-03-24T00:00:00Z</updated>
+		<content>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;
+&lt;h1 id="auto-save"&gt;Auto save&lt;/h1&gt;
+&lt;p&gt;Most of the time I like my IDE to save files automatically instead of having to save each and every file independently. I know, I can save all files, but that's still more work that letting the IDE do it.&lt;/p&gt;
+&lt;p&gt;To configure this, just add the following to the main object in &lt;code&gt;settings.json&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-json"&gt;&amp;quot;files.autoSave&amp;quot;: &amp;quot;afterDelay&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id="associate-language-with-file-extensions"&gt;Associate language with file extensions&lt;/h1&gt;
+&lt;p&gt;As you can read in the &lt;a href="https://code.visualstudio.com/docs/languages/overview#_adding-a-file-extension-to-a-language"&gt;VS Code documentation&lt;/a&gt;, you can set a language for each file extension.&lt;/p&gt;
+&lt;p&gt;In my example, I would like to add the &lt;code&gt;.wyam&lt;/code&gt; file extension to &lt;code&gt;C#&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-json"&gt;&amp;quot;files.associations&amp;quot;: {
+    &amp;quot;*.wyam&amp;quot;: &amp;quot;csharp&amp;quot;
+},
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+		<summary>&lt;p&gt;VS Code is very configurable. In this post I'll share the configuration I like to use.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>http://johanvergeer.github.io/posts/useful-links</id>
