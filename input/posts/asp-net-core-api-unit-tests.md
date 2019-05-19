@@ -83,3 +83,5 @@ In this last test, we have to see what happens if the `Person` doesn't have a va
 ## Conclusion
 
 As you can see, we can test an API controller without any integration to other components of the application. We didn't even need an implementation for the repository. This way we have a fast and loosely coupled way to test our controllers.
+
+The code for this project is located in the [GitHub repo](https://github.com/johanvergeer/ImJohan.Blog.AspNetCoreApiUnitTests).
