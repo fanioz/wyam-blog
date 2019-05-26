@@ -4,8 +4,40 @@
 	<title>I'm Johan</title>
 	<link rel="self" href="http://johanvergeer.github.io/" />
 	<rights>2019</rights>
-	<updated>2019-05-19T16:04:29Z</updated>
+	<updated>2019-05-26T18:10:35Z</updated>
 	<subtitle>Welcome!</subtitle>
+	<entry>
+		<id>http://johanvergeer.github.io/posts/net-guid-uuid-version</id>
+		<title>What is the Guid in .NET?</title>
+		<author>
+			<name>Johan Vergeer</name>
+		</author>
+		<link href="http://johanvergeer.github.io/posts/net-guid-uuid-version" />
+		<updated>2019-05-26T00:00:00Z</updated>
+		<content>&lt;p&gt;After having done some online reseach I found that a Guid in .NET is probably a UUID version 4. Let's put that to the test.&lt;/p&gt;
+&lt;p&gt;I found several online resources that say something about .NET's &lt;code&gt;System.Guid&lt;/code&gt;. Some of them are spot on, but not complete, but most of them say is't Microsofts implementation of a &lt;a href="https://web.archive.org/web/20060615195933/http://www.webdav.org/specs/draft-leach-uuids-guids-01.txt"&gt;UUID&lt;/a&gt;. These explanations are also right, but not complete. So here is my take on &lt;code&gt;System.Guid&lt;/code&gt;. First to get the obvious out of the way. &lt;em&gt;GUID&lt;/em&gt; is an acronym for &lt;em&gt;Globally Unique Identifier&lt;/em&gt; and &lt;em&gt;UUID&lt;/em&gt; for &lt;em&gt;Universally Unique Identifier&lt;/em&gt;. Nice to know but not very helpful. As you already know it is used by Microsoft in the .NET ecosystem. A lot of people seem to think it is exclusively used by Microsoft, but that's not true. It is also used by Oracle which has &lt;a href="https://docs.oracle.com/cd/B12037_01/server.101/b10759/functions153.htm"&gt;&lt;code&gt;SYS_GUID&lt;/code&gt;&lt;/a&gt; and C++ has a &lt;a href="https://docs.microsoft.com/en-us/windows/desktop/api/combaseapi/nf-combaseapi-cocreateguid"&gt;&lt;code&gt;CoCreateGuide()&lt;/code&gt;&lt;/a&gt; function. I'm sure there are more implementation that use Guid, but I haven't looked for them since that's not the point of this post.&lt;/p&gt;
+&lt;p&gt;I found a post on MSDN&lt;a id="fnref:1" href="#fn:1" class="footnote-ref"&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; with a discussion whether &lt;code&gt;System.Guid&lt;/code&gt; produces a UUID version 4, but even that thread couldn't rule everything out. So I wrote a simple script to put it to the test. The proposed standard on IETF&lt;a id="fnref:2" href="#fn:2" class="footnote-ref"&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; states &lt;em&gt;the UUID version is in the most significant 4 bits of the time stamp (bits 4 through 7 of the time_hi_and_version field)&lt;/em&gt;. This means it should be the fifteenth character in the UUID. So let's print out a couple of Guids to the console and have a look:&lt;/p&gt;
+&lt;?# Gist 7206ed44b09a8cc0c2a49f32ee8c3b40 File="a-list-of-guids-version-4" /?&gt;
+&lt;p&gt;This looks like &lt;code&gt;System.Guid&lt;/code&gt; is indeed a version 4 UUID. But then again, printing out 10 items doesn't really rule out that other values might occur, so lets print a couple more. I created a console application with the following script, which will generate 10 million Guids and verify whether each Guid is indeed a UUID version 4. Each time a Guid is found that isn't version 4 the &lt;code&gt;Errors found&lt;/code&gt; value will increase.&lt;/p&gt;
+&lt;?# Gist 7206ed44b09a8cc0c2a49f32ee8c3b40 File="Program.cs" /?&gt;
+&lt;p&gt;This shows the output below. I ran this test a couple of times and the results are the same every time I ran it. The conclusion I can draw from is this that it is &lt;strong&gt;very&lt;/strong&gt; likely that &lt;code&gt;System.Guid&lt;/code&gt; is a UUID version 4.&lt;/p&gt;
+&lt;?# Gist 7206ed44b09a8cc0c2a49f32ee8c3b40 File="test-results-10-million-guids" /?&gt;
+&lt;p&gt;If you have any other insights on this topic, please let me know in the comments.&lt;/p&gt;
+&lt;h4 id="sources"&gt;Sources&lt;/h4&gt;
+&lt;div class="footnotes"&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id="fn:1"&gt;
+&lt;p&gt;&lt;a href="https://social.msdn.microsoft.com/Forums/en-US/4956142a-0a5d-4f1e-b102-93a3eea1b5d5/does-guidnewguid-produce-uuid-version-4-according-to-rfc4122?forum=netfxbcl"&gt;Thread on MSDN on System.Guid&lt;/a&gt;&lt;a href="#fnref:1" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id="fn:2"&gt;
+&lt;p&gt;&lt;a href="https://tools.ietf.org/html/rfc4122#section-4.1.3"&gt;IETF proposed UUID Standard&lt;/a&gt;&lt;a href="#fnref:2" class="footnote-back-ref"&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</content>
+		<summary>&lt;p&gt;After having done some online reseach I found that a Guid in .NET is probably a UUID version 4. Let's put that to the test.&lt;/p&gt;</summary>
+	</entry>
 	<entry>
 		<id>http://johanvergeer.github.io/posts/asp-net-core-api-unit-tests</id>
 		<title>ASP.NET Core API Unit Tests</title>
