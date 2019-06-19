@@ -3,7 +3,6 @@
 #t BlogTemplate
 
 #n Wyam.SearchIndex
-//#n HtmlBuilders
 
 using	 System.IO;
 using System.Xml.Linq;
@@ -122,6 +121,7 @@ public class Card : IShortcode
 
 // Customize your settings and add new ones here
 Settings[Keys.Host] = "johanvergeer.github.io";
+Settings[Keys.DateTimeInputCulture] = "nl-NL";
 Settings[BlogKeys.Title] = "I'm Johan";
 Settings[BlogKeys.Description] = "Welcome!";
 
@@ -140,6 +140,33 @@ Pipelines.Insert(
             Layout = (doc, ctx) => doc.String("Layout", "/_Layout.cshtml")
         }
 	)
+);
+
+int renderBlogPostsIndex = Pipelines.IndexOf(Blog.RenderBlogPosts);
+Pipelines.Remove(Blog.RenderBlogPosts);
+Pipelines.Insert(
+	renderBlogPostsIndex,
+	Blog.RenderBlogPosts,
+	ReadFiles("posts/*.md"),
+	FrontMatter(Yaml()),
+	Meta("SearchIndexItem", 
+		new SearchIndexItem("/" + @doc.String(Keys.RelativeFilePathBase), @doc.String("Title"), @doc.Content) 
+			{ 
+				Description = @doc.String("Description"), 
+				Tags = @doc.String("Tags") 
+			}
+	),
+	Markdown(),
+	Excerpt(),
+	Razor(),
+	WriteFiles(".html")
+);
+
+
+Pipelines.Add("SearchIndex",
+	Documents(Blog.RenderBlogPosts),
+	SearchIndex((FilePath)"stopwords.txt"),
+	WriteFiles((doc,ctx) => string.IsNullOrEmpty(doc.Content) ? null : "searchindex.js").UseWriteMetadata(false)
 );
 
 class GlossaryItem {

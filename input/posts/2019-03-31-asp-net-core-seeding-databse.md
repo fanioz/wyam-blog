@@ -1,6 +1,5 @@
 ---
 Title: ASP.NET Core seeding the database
-Published: 3/31/2019
 Tags: [Csharp, ASP.NET Core]
 author: Johan Vergeer
 ---

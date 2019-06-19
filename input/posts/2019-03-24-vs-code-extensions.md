@@ -1,6 +1,5 @@
 ---
 Title: VS Code Extensions
-Published: 3/24/2019
 Tags: [VS Code, Visual Studio Code]
 author: Johan Vergeer
 ---

@@ -1,6 +1,5 @@
 ---
 Title: ASP.NET Core API Unit Tests
-Published: 5/19/2019
 Tags: [Csharp, ASP.NET Core, Unit tests]
 author: Johan Vergeer
 ---

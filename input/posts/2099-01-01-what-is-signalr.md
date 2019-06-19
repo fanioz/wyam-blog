@@ -1,6 +1,5 @@
 ---
 Title: What is SignalR
-Published: 3/17/2099
 Tags: [Csharp, SignalR]
 author: Johan Vergeer
 ---

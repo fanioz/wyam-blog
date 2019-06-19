@@ -1,6 +1,5 @@
 ---
 Title: What is gRPC
-Published: 3/17/2099
 Tags: [gRPC]
 author: Johan Vergeer
 ---

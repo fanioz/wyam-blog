@@ -1,6 +1,5 @@
 ---
 Title: Wyam, Azure DevOps and GitHub Pages
-Published: 3/16/2019
 Tags: [Csharp, Wyam, Continuous Integration, GitHub Pages, Azure DevOps]
 author: Johan Vergeer
 ---

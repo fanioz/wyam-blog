@@ -1,6 +1,5 @@
 ---
 Title: Exception handling
-Published: 4/7/2019
 Tags: [General]
 author: Johan Vergeer
 ---

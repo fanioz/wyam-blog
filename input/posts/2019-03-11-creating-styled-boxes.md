@@ -1,6 +1,5 @@
 ---
 Title: Creating styled boxes for a Wyam site
-Published: 3/11/2019
 Tags: [Csharp, Wyam, CSS]
 author: Johan Vergeer
 ---

@@ -1,6 +1,5 @@
 ---
 Title: ASP.NET Core integration tests
-Published: 3/31/2019
 Tags: [Csharp, ASP.NET Core, Integration tests]
 author: Johan Vergeer
 ---

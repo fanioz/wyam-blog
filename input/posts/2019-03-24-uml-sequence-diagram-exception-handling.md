@@ -1,6 +1,5 @@
 ---
 Title: Exception handling in UML Sequence Diagram
-Published: 3/24/2019
 Tags: [UML, Sequence Diagrams]
 author: Johan Vergeer
 ---

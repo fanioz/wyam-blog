@@ -1,6 +1,5 @@
 ---
 Title: VS Code Settings
-Published: 3/24/2019
 Tags: [VS Code, Visual Studio Code]
 author: Johan Vergeer
 ---

@@ -1,6 +1,5 @@
 ---
 Title: What is the Guid in .NET?
-Published: 5/26/2019
 Tags: [.NET, ]
 author: Johan Vergeer
 ---
