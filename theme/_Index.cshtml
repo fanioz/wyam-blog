@@ -12,8 +12,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h1 class="title">I'm Johan</h1>
-                    <h4>Doing what I like, and liking what I do</h4>
+                    <h1 class="title">Blog Fanioz</h1>
+                    <h4>hanya sebuah coretan</h4>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="title mb-5">
-                            <h1>Latest posts</h1>
+                            <h1>Postingan Terakhir</h1>
                         </div>
 
                         @foreach(IDocument post in Model.DocumentList(Keys.PageDocuments))
@@ -44,7 +44,7 @@
                 </div>
 
                 @if(Model.Bool(Keys.HasPreviousPage)) {
-                    <a href="@(Context.GetLink(Model.Document(Keys.PreviousPage)))"><span aria-hidden="true">&larr;</span> Newer</a> 
+                    <a href="@(Context.GetLink(Model.Document(Keys.PreviousPage)))"><span aria-hidden="true">&larr;</span> Terbaru</a> 
                 } 
 
                 @if(Model.Bool(Keys.HasNextPage)) {
@@ -53,7 +53,7 @@
 
                 @if(Context.Bool(BlogKeys.GenerateArchive))
                 {
-                    <a href="@Context.GetLink(Context.String(BlogKeys.PostsPath))">All Posts <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
+                    <a href="@Context.GetLink(Context.String(BlogKeys.PostsPath))">Lihat Semua <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>
                 }
             </div>
         </div>
